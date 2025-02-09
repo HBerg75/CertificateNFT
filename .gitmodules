@@ -1,0 +1,3 @@
+[submodule "esgichain-nft/lib/openzeppelin-contracts"]
+	path = esgichain-nft/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
