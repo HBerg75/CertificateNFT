@@ -1,6 +1,6 @@
 "use client";
 
-import { Command, Frame, Map, PieChart } from "lucide-react";
+import { Command, Frame, PieChart } from "lucide-react";
 import * as React from "react";
 
 import { NavProjects } from "@/components/nav-projects";
@@ -17,26 +17,16 @@ import {
 import Link from "next/link";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
+      name: "Certificates",
+      url: "/",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
+      name: "Users",
+      url: "/users",
       icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
@@ -53,8 +43,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-semibold">
+                    ESGI - Student Certificates
+                  </span>
+                  <span className="truncate text-xs">
+                    All student&apos;s certificates from ESGI
+                  </span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -65,7 +59,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
