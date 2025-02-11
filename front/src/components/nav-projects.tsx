@@ -8,8 +8,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
+import { useHasRoleAdmin } from "@/lib/hook";
+import Link from "next/link";
 
 export function NavProjects({
   projects,
@@ -18,10 +19,10 @@ export function NavProjects({
     name: string;
     url: string;
     icon: LucideIcon;
+    admin?: boolean;
   }[];
 }) {
-  const { isMobile } = useSidebar();
-
+  const hasRoleAdmin = useHasRoleAdmin();
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
@@ -29,10 +30,19 @@ export function NavProjects({
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
-              </a>
+              {item.admin && hasRoleAdmin ? (
+                <Link href={item.url}>
+                  <item.icon />
+                  <span>{item.name}</span>
+                </Link>
+              ) : (
+                !item.admin && (
+                  <Link href={item.url}>
+                    <item.icon />
+                    <span>{item.name}</span>
+                  </Link>
+                )
+              )}
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

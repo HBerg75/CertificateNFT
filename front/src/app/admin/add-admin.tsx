@@ -3,12 +3,12 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,15 +19,9 @@ import { getDefaultAdminRole } from "@/lib/certificates.action";
 import { isValidAddress } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
-import {
-  type BaseError,
-  useAccount,
-  useWaitForTransactionReceipt,
-} from "wagmi";
+import { type BaseError, useWaitForTransactionReceipt } from "wagmi";
 
 export default function AddAdmin() {
-  const { address } = useAccount();
-
   const [newAdminAddress, setNewAdminAddress] = useState<string>("");
   const {
     data: hash,
@@ -45,7 +39,7 @@ export default function AddAdmin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("clicked");
+
     if (!isValidAddress(newAdminAddress)) {
       toast.error("Invalid address");
       return;
@@ -77,7 +71,7 @@ export default function AddAdmin() {
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex flex-col gap-4 justify-start items-start">
         <Button onClick={(e) => handleSubmit(e)} disabled={isPending}>
           {isPending
             ? "Approving request..."
@@ -85,34 +79,34 @@ export default function AddAdmin() {
               ? "Granting..."
               : "Grant Admin Role"}
         </Button>
+        {isError && (
+          <Alert variant="destructive" className="w-full">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              {transacRevertErr?.message || "Transaction revert"}
+            </AlertDescription>
+          </Alert>
+        )}
+        {error && (
+          <Alert variant="destructive" className="w-full">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              {(error as BaseError).shortMessage || error?.message}
+            </AlertDescription>
+          </Alert>
+        )}
+        {isSuccess && (
+          <Alert variant="default" className="w-full">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Success</AlertTitle>
+            <AlertDescription>
+              Admin role granted to {newAdminAddress}
+            </AlertDescription>
+          </Alert>
+        )}
       </CardFooter>
-      {error && (
-        <Alert variant="destructive" className="mx-6 mb-6 w-fit">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>
-            {transacRevertErr?.message || "Transaction revert"}
-          </AlertDescription>
-        </Alert>
-      )}
-      {isError && (
-        <Alert variant="destructive" className="mx-6 mb-6 w-fit">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>
-            {(error as BaseError).shortMessage || error?.message}
-          </AlertDescription>
-        </Alert>
-      )}
-      {isSuccess && (
-        <Alert variant="default" className="mx-6 mb-6 w-fit">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Success</AlertTitle>
-          <AlertDescription>
-            Admin role granted to {newAdminAddress}
-          </AlertDescription>
-        </Alert>
-      )}
     </Card>
   );
 }

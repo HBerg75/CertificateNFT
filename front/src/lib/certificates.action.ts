@@ -41,3 +41,13 @@ export const getDefaultAdminRole = async () => {
   });
   return result;
 };
+
+export const isAdmin = async (address: `0x${string}`) => {
+  const result = await readContract(config, {
+    abi: academicCertificateNftAbi,
+    address: academicCertificateNftAddress,
+    functionName: "hasRole",
+    args: [await getDefaultAdminRole(), address],
+  });
+  return result;
+};

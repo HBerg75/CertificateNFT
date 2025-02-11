@@ -27,6 +27,7 @@ const data = {
       name: "Admin",
       url: "/admin",
       icon: PieChart,
+      admin: true,
     },
   ],
 };

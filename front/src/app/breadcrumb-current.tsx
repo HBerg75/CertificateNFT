@@ -7,7 +7,7 @@ export default function BreadcrumbCurrent() {
 
   return (
     <BreadcrumbPage>
-      {pathname === "/" ? "Certificates" : "Users"}
+      {pathname === "/" ? "Certificates" : "Admin"}
     </BreadcrumbPage>
   );
 }
