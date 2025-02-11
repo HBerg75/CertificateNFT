@@ -1,6 +1,7 @@
 import AddAdmin from "./add-admin";
 import AddCert from "./add-cert";
 import AddCertIssuer from "./add-cert-issuer";
+import Revoke from "./revoke";
 import AdminTitle from "./title";
 
 export default function Admin() {
@@ -17,6 +18,9 @@ export default function Admin() {
           </div>
           <div className="flex flex-col h-full">
             <AddCert />
+          </div>
+          <div className="flex flex-col h-full">
+            <Revoke />
           </div>
         </div>
       </div>

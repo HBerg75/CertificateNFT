@@ -31,7 +31,11 @@ export default function CertificateCards({
       {certificates.map((cert) => (
         <Card key={cert.studentId} className="overflow-hidden">
           <CardHeader className="pb-2">
-            <div className="font-semibold">{cert.studentFullName}</div>
+            <div className="font-semibold flex gap-4">
+              {cert.studentFullName}
+              {cert.isActive && <Badge>Active</Badge>}
+              {!cert.isActive && <Badge variant="destructive">Revoked</Badge>}
+            </div>
             <CardDescription className="flex items-center">
               <Calendar className="mr-2 h-4 w-4" />
               Year: {cert.graduationYear}
@@ -41,7 +45,6 @@ export default function CertificateCards({
             <div className="aspect-video relative mb-4">
               <Image
                 src={
-                  cert.imageUrl ||
                   "https://images.itnewsinfo.com/commun/publi_info/originale/000000071477.png"
                 }
                 alt={`Certificate ${cert.graduationYear}`}
