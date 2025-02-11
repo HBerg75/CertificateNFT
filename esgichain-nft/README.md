@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ESGIChain - Gestion des Certificats Académiques via NFT
 
 ## 📌 Description du Projet
@@ -143,4 +144,3 @@ Les tests incluent :
 ### **📌 Remarque**
 Si vous avez des questions ou besoin d’aide, référez-vous à la documentation Avalanche :
 🔗 [Avalanche Docs](https://build.avax.network/docs/tooling/create-avalanche-l1)
-
