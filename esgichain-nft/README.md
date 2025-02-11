@@ -1,66 +1,146 @@
-## Foundry
+# ESGIChain - Gestion des Certificats Académiques via NFT
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## 📌 Description du Projet
+Ce projet implémente une solution basée sur **Avalanche** pour la gestion des certificats académiques sous forme de **NFTs dynamiques**. Il repose sur un **L1 personnalisé** déployé sur un **subnet Avalanche** et utilise **Solidity & Foundry** pour le développement des smart contracts.
 
-Foundry consists of:
+---
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Le projet repose sur un **L1 personnalisé (ESGIChain)** qui permet la gestion des certificats sous forme de **NFTs**. L'accès est contrôlé via **AccessControl**, et les certificats sont stockés avec des **métadonnées dynamiques**.
 
-## Documentation
+---
 
-https://book.getfoundry.sh/
+## 🚀 Installation & Déploiement
 
-## Usage
+### **1️⃣ Build et Lancement du Conteneur Docker**
 
-### Build
+Dans le répertoire du projet, exécutez :
 
-```shell
-$ forge build
+```bash
+docker build -t avalanche-cli .
+docker run -it --rm --name avalanche-cli avalanche-cli /bin/bash
 ```
 
-### Test
+Une fois dans le conteneur, passez en root :
 
-```shell
-$ forge test
+```bash
+su root
 ```
 
-### Format
+---
 
-```shell
-$ forge fmt
+### **2️⃣ Installation de l'Avalanche-CLI**
+
+Si ce n'est pas encore fait, installez l'Avalanche-CLI dans le conteneur :
+
+```bash
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s
+export PATH=~/bin:$PATH
 ```
 
-### Gas Snapshots
+Ajoutez cette ligne à `~/.bashrc` pour la rendre permanente :
 
-```shell
-$ forge snapshot
+```bash
+echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
 
-### Anvil
+---
 
-```shell
-$ anvil
+### **3️⃣ Démarrage du Réseau Local Avalanche**
+
+```bash
+avalanche network start
 ```
 
-### Deploy
+Vérifiez le statut du réseau avec :
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```bash
+avalanche network status
 ```
 
-### Cast
+---
 
-```shell
-$ cast <subcommand>
+### **4️⃣ Création de la Blockchain ESGIChain**
+
+```bash
+avalanche blockchain create ESGIChain
 ```
 
-### Help
+Répondez aux questions interactives :
+- **VM** : `Subnet-EVM`
+- **Validation** : `Proof of Authority`
+- **Contrôleur** : sélectionnez une adresse
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+Une fois créé, déployez-le sur le réseau local :
+
+```bash
+avalanche network deploy ESGIChain --local
 ```
+
+Notez l'URL du point de terminaison RPC fourni après le déploiement.
+
+---
+
+## 🎯 Déploiement et Test des Smart Contracts
+
+### **1️⃣ Installation des Dépendances**
+
+```bash
+forge install
+forge install OpenZeppelin/openzeppelin-contracts
+```
+
+---
+
+### **2️⃣ Compilation et Déploiement du Smart Contract**
+
+```bash
+forge build
+forge script script/DeployCertificateNFT.s.sol --broadcast --rpc-url http://127.0.0.1:9650 --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --private-key <PRIVATE_KEY>
+```
+
+⚠️ **Remarque** : Remplacez `<PRIVATE_KEY>` par votre clé privée.
+
+---
+
+### **3️⃣ Exécution des Tests**
+
+```bash
+forge test
+```
+
+Pour voir la couverture des tests :
+
+```bash
+forge coverage
+```
+
+---
+
+## 📜 Explication des Smart Contracts
+
+Le **Smart Contract `CertificateNFT.sol`** permet de :
+- **Émettre** un NFT pour un étudiant (`mintCertificate`)
+- **Révoquer** un certificat (`revokeCertificate`)
+- **Mettre à jour** les métadonnées (`updateCertificateMetadata`)
+- **Récupérer** la liste des certificats d’un étudiant (`getCertificatesByStudent`)
+- **Récupérer** les détails d’un certificat (`getCertificateDetails`)
+
+---
+
+## 🧪 Explication des Tests
+
+Les tests incluent :
+- `testMintCertificate()` : Vérifie qu’un certificat peut être émis ✅
+- `testRevokeCertificate()` : Vérifie la révocation d’un certificat ✅
+- `testUpdateMetadata()` : Vérifie la mise à jour des métadonnées ✅
+- `testUnauthorizedAccess()` : Vérifie que seuls les admins peuvent révoquer un certificat ❌
+- `testEventEmissionOnMint()` : Vérifie l’émission de l’événement lors du mint ✅
+- `testGetCertificatesByStudent()` : Vérifie que les étudiants reçoivent bien leurs certificats ✅
+
+---
+
+### **📌 Remarque**
+Si vous avez des questions ou besoin d’aide, référez-vous à la documentation Avalanche :
+🔗 [Avalanche Docs](https://build.avax.network/docs/tooling/create-avalanche-l1)
+
