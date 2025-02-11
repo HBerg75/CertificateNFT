@@ -51,3 +51,22 @@ export const isAdmin = async (address: `0x${string}`) => {
   });
   return result;
 };
+
+export const getCertificateIssuerRole = async () => {
+  const result = await readContract(config, {
+    abi: academicCertificateNftAbi,
+    address: academicCertificateNftAddress,
+    functionName: "CERTIFICATE_ISSUER",
+  });
+  return result;
+};
+
+export const isCertIssuer = async (address: `0x${string}`) => {
+  const result = await readContract(config, {
+    abi: academicCertificateNftAbi,
+    address: academicCertificateNftAddress,
+    functionName: "hasRole",
+    args: [await getCertificateIssuerRole(), address],
+  });
+  return result;
+};
