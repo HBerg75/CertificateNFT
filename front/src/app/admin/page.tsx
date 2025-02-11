@@ -1,5 +1,6 @@
 import AddAdmin from "./add-admin";
 import AddCert from "./add-cert";
+import AddCertIssuer from "./add-cert-issuer";
 import AdminTitle from "./title";
 
 export default function Admin() {
@@ -9,10 +10,13 @@ export default function Admin() {
         <AdminTitle />
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
           <div className="flex flex-col h-full">
-            <AddCert />
+            <AddAdmin />
           </div>
           <div className="flex flex-col h-full">
-            <AddAdmin />
+            <AddCertIssuer />
+          </div>
+          <div className="flex flex-col h-full">
+            <AddCert />
           </div>
         </div>
       </div>
