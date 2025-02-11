@@ -1,66 +1,25 @@
-## Foundry
+## Quick Start
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+git clone https://github.com/HBerg75/CertificateNFT.git
+cd CertificateNFT
 ```
 
-### Test
+Test the contract
 
-```shell
-$ forge test
+```bash
+forge install
+forge test -vv
+forge coverage
+forge coverage --report debug > report.log
 ```
 
-### Format
+Deploy the contract on the Ethereum network
 
-```shell
-$ forge fmt
+```bash
+source .env
+forge wallet unlock --private-key PRIVATE_KEY
+forge script --chain-id 43113 script/DeployCertificateNFT.s.sol:DeployCertificateNFT --rpc-url $RPC_URL -vvv --broadcast --sender $PUBLIC_WALLET_ADDRESS --private-key PRIVATE_KEY
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+You can delete --broadcast if you just want to see if the deployment script is correct
