@@ -32,3 +32,12 @@ export const getCertsPage = async (page: number, pageSize: number) => {
   }
   return certs;
 };
+
+export const getDefaultAdminRole = async () => {
+  const result = await readContract(config, {
+    abi: academicCertificateNftAbi,
+    address: academicCertificateNftAddress,
+    functionName: "DEFAULT_ADMIN_ROLE",
+  });
+  return result;
+};

@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { ModeToggle, ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import Web3ModalProvider from "@/components/web3-modal";
 import { config } from "@/lib/wagmi-conf";
 import { cookieToInitialState } from "wagmi";
@@ -51,6 +52,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Toaster />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

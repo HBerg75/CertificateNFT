@@ -11,7 +11,8 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
  */
 contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
     /// @notice Rôle pour les utilisateurs autorisés à créer des certificats
-    bytes32 public constant CERTIFICATE_ISSUER = keccak256("CERTIFICATE_ISSUER");
+    bytes32 public constant CERTIFICATE_ISSUER =
+        keccak256("CERTIFICATE_ISSUER");
 
     /// @dev Compteur interne pour l'attribution des IDs de certificats
     uint256 private _tokenCounter;
@@ -20,13 +21,13 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
      * @dev Structure contenant les informations d'un certificat académique.
      */
     struct CertificateInfo {
-        string studentFullName;   // Nom complet de l'étudiant
-        uint256 studentId;        // ID unique de l'étudiant
-        string diplomaTitle;      // Nom du diplôme obtenu
-        uint256 graduationYear;   // Année d'obtention du diplôme
-        string academicGrade;     // Mention ou note obtenue
-        bool isActive;            // Indique si le certificat est valide
-        uint256 issuedAt;         // Timestamp de l'émission
+        string studentFullName; // Nom complet de l'étudiant
+        uint256 studentId; // ID unique de l'étudiant
+        string diplomaTitle; // Nom du diplôme obtenu
+        uint256 graduationYear; // Année d'obtention du diplôme
+        string academicGrade; // Mention ou note obtenue
+        bool isActive; // Indique si le certificat est valide
+        uint256 issuedAt; // Timestamp de l'émission
     }
 
     /// @dev Associe chaque token ID à ses informations de certificat
@@ -36,9 +37,22 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
     mapping(uint256 => uint256[]) private _studentCertificates;
 
     /// @notice Événements pour suivre les actions sur les certificats
-    event CertificateMinted(uint256 indexed certificateId, uint256 indexed studentId, string diplomaTitle, uint256 issuedAt);
-    event CertificateRevoked(uint256 indexed certificateId, uint256 revokedAt, string justification);
-    event CertificateMetadataUpdated(uint256 indexed certificateId, string newMetadataUri, uint256 updatedAt);
+    event CertificateMinted(
+        uint256 indexed certificateId,
+        uint256 indexed studentId,
+        string diplomaTitle,
+        uint256 issuedAt
+    );
+    event CertificateRevoked(
+        uint256 indexed certificateId,
+        uint256 revokedAt,
+        string justification
+    );
+    event CertificateMetadataUpdated(
+        uint256 indexed certificateId,
+        string newMetadataUri,
+        uint256 updatedAt
+    );
 
     /**
      * @dev Constructeur du contrat.
@@ -89,7 +103,12 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
         _setTokenURI(certificateId, metadataUri);
 
         // Émet un événement pour signaler la création du certificat
-        emit CertificateMinted(certificateId, studentId, diplomaTitle, block.timestamp);
+        emit CertificateMinted(
+            certificateId,
+            studentId,
+            diplomaTitle,
+            block.timestamp
+        );
 
         return certificateId;
     }
@@ -100,9 +119,18 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
      * @param certificateId L'ID du certificat à invalider
      * @param justification Motif de la révocation
      */
-    function revokeCertificate(uint256 certificateId, string memory justification) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        require(_ownerOf(certificateId) != address(0), "Certificat introuvable");
-        require(_certificateRecords[certificateId].isActive, "Certificat deja revoquer");
+    function revokeCertificate(
+        uint256 certificateId,
+        string memory justification
+    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        require(
+            _ownerOf(certificateId) != address(0),
+            "Certificat introuvable"
+        );
+        require(
+            _certificateRecords[certificateId].isActive,
+            "Certificat deja revoquer"
+        );
 
         _certificateRecords[certificateId].isActive = false;
         emit CertificateRevoked(certificateId, block.timestamp, justification);
@@ -114,12 +142,25 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
      * @param certificateId L'ID du certificat à modifier
      * @param newMetadataUri Nouvelle URI contenant les données du certificat
      */
-    function updateCertificateMetadata(uint256 certificateId, string memory newMetadataUri) public onlyRole(CERTIFICATE_ISSUER) {
-        require(_ownerOf(certificateId) != address(0), "Certificat introuvable");
-        require(_certificateRecords[certificateId].isActive, "Ce certificat est revoquer");
+    function updateCertificateMetadata(
+        uint256 certificateId,
+        string memory newMetadataUri
+    ) public onlyRole(CERTIFICATE_ISSUER) {
+        require(
+            _ownerOf(certificateId) != address(0),
+            "Certificat introuvable"
+        );
+        require(
+            _certificateRecords[certificateId].isActive,
+            "Ce certificat est revoquer"
+        );
 
         _setTokenURI(certificateId, newMetadataUri);
-        emit CertificateMetadataUpdated(certificateId, newMetadataUri, block.timestamp);
+        emit CertificateMetadataUpdated(
+            certificateId,
+            newMetadataUri,
+            block.timestamp
+        );
     }
 
     /**
@@ -127,7 +168,9 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
      * @param studentId L'ID de l'étudiant concerné
      * @return uint256[] Liste des IDs des certificats appartenant à l'étudiant
      */
-    function getCertificatesByStudent(uint256 studentId) public view returns (uint256[] memory) {
+    function getCertificatesByStudent(
+        uint256 studentId
+    ) public view returns (uint256[] memory) {
         return _studentCertificates[studentId];
     }
 
@@ -136,15 +179,30 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
      * @param certificateId L'ID du certificat recherché
      * @return CertificateInfo Structure contenant toutes les données du certificat
      */
-    function getCertificateDetails(uint256 certificateId) public view returns (CertificateInfo memory) {
-        require(_ownerOf(certificateId) != address(0), "Certificat introuvable");
+    function getCertificateDetails(
+        uint256 certificateId
+    ) public view returns (CertificateInfo memory) {
+        require(
+            _ownerOf(certificateId) != address(0),
+            "Certificat introuvable"
+        );
         return _certificateRecords[certificateId];
     }
 
     /**
      * @dev Implémente la compatibilité avec ERC721 et AccessControl.
      */
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721URIStorage, AccessControl) returns (bool) {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view override(ERC721URIStorage, AccessControl) returns (bool) {
         return super.supportsInterface(interfaceId);
+    }
+
+    /**
+     * @notice Récupère le nombre total de certificats émis.
+     * @return uint256 Le nombre total de certificats
+     */
+    function getTotalCertificates() public view returns (uint256) {
+        return _tokenCounter;
     }
 }

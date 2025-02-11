@@ -11,30 +11,35 @@ contract CertificateNFTTest is Test {
     function setUp() public {
         certificateNFT = new AcademicCertificateNFT();
         // Accorde le rôle d'administrateur au contrat de test
-        certificateNFT.grantRole(certificateNFT.DEFAULT_ADMIN_ROLE(), address(this));
+        certificateNFT.grantRole(
+            certificateNFT.DEFAULT_ADMIN_ROLE(),
+            address(this)
+        );
     }
 
     function testMintCertificate() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user, 
-            "Alice Dupont", 
-            2025001, 
-            "Master en Blockchain", 
-            unicode"Mention Très Bien", 
+            user,
+            "Alice Dupont",
+            2025001,
+            "Master en Blockchain",
+            unicode"Mention Très Bien",
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
-        uint256[] memory certs = certificateNFT.getCertificatesByStudent(2025001);
+        uint256[] memory certs = certificateNFT.getCertificatesByStudent(
+            2025001
+        );
         assertEq(certs.length, 1);
     }
 
     function testRevokeCertificate() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user, 
-            "Alice Dupont", 
-            2025001, 
-            "Master en Blockchain", 
-            unicode"Mention Très Bien", 
+            user,
+            "Alice Dupont",
+            2025001,
+            "Master en Blockchain",
+            unicode"Mention Très Bien",
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
@@ -42,9 +47,14 @@ contract CertificateNFTTest is Test {
         certificateNFT.revokeCertificate(certId, "Erreur administrative");
 
         // Récupération des infos du certificat
-        AcademicCertificateNFT.CertificateInfo memory certInfo = certificateNFT.getCertificateDetails(certId);
+        AcademicCertificateNFT.CertificateInfo memory certInfo = certificateNFT
+            .getCertificateDetails(certId);
 
         // Vérifie que le certificat est bien révoqué
-        assertEq(certInfo.isActive, false, "Le certificat devrait etre revoque");
+        assertEq(
+            certInfo.isActive,
+            false,
+            "Le certificat devrait etre revoque"
+        );
     }
 }

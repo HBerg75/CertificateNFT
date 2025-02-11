@@ -24,8 +24,8 @@ const data = {
       icon: Frame,
     },
     {
-      name: "Users",
-      url: "/users",
+      name: "Admin",
+      url: "/admin",
       icon: PieChart,
     },
   ],
