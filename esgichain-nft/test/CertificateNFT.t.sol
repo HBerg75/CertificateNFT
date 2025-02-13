@@ -7,6 +7,7 @@ import "../src/CertificateNFT.sol";
 contract CertificateNFTTest is Test {
     event CertificateMinted(uint256 indexed certId, uint256 indexed studentId, string course, uint256 timestamp);
     event CertificateRevoked(uint256 indexed certId, uint256 timestamp, string reason);
+    
     AcademicCertificateNFT certificateNFT;
     address admin = address(this);
     address user = address(1);
@@ -21,27 +22,25 @@ contract CertificateNFTTest is Test {
 
     function testMintCertificate() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
-        uint256[] memory certs = certificateNFT.getCertificatesByStudent(
-            2025001
-        );
+        uint256[] memory certs = certificateNFT.getCertificatesByStudent(2025001);
         assertEq(certs.length, 1);
     }
 
     function testRevokeCertificate() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
@@ -49,8 +48,7 @@ contract CertificateNFTTest is Test {
         certificateNFT.revokeCertificate(certId, "Erreur administrative");
 
         // Récupération des infos du certificat
-        AcademicCertificateNFT.CertificateInfo memory certInfo = certificateNFT
-            .getCertificateDetails(certId);
+        AcademicCertificateNFT.CertificateInfo memory certInfo = certificateNFT.getCertificateDetails(certId);
 
         // Vérifie que le certificat est bien révoqué
         assertEq(certInfo.isActive, false, "Le certificat devrait etre revoquer");
@@ -58,15 +56,16 @@ contract CertificateNFTTest is Test {
 
     function testUpdateMetadata() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
         certificateNFT.updateCertificateMetadata(certId, "https://ipfs.io/ipfs/nouveau_hash");
+
         // Vérification via getCertificateDetails()
         AcademicCertificateNFT.CertificateInfo memory certInfo = certificateNFT.getCertificateDetails(certId);
         assertEq(certInfo.isActive, true, "Le certificat devrait toujours etre actif");
@@ -84,11 +83,11 @@ contract CertificateNFTTest is Test {
 
     function testRevokeAlreadyRevokedCertificate() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
@@ -100,38 +99,38 @@ contract CertificateNFTTest is Test {
 
     function testUnauthorizedAccess() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
         // Simule une transaction depuis un utilisateur non autorisé
         vm.prank(unauthorizedUser);
 
-        // Utilisation d'une assertion plus flexible pour s'assurer que c'est bien une erreur d'AccessControl
+        // Capture toute erreur, quelle qu'elle soit
         vm.expectRevert();
         certificateNFT.revokeCertificate(certId, "Tentative non autorisee");
     }
 
     function testGetCertificatesByStudent() public {
         uint256 certId1 = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
         uint256 certId2 = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Doctorat en Cryptographie",
-            unicode"Mention Honorable",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Doctorat en Cryptographie", 
+            unicode"Mention Honorable", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
@@ -142,24 +141,24 @@ contract CertificateNFTTest is Test {
     function testEventEmissionOnMint() public {
         vm.expectEmit(true, true, true, true);
         emit CertificateMinted(0, 2025001, "Master en Blockchain", block.timestamp);
-
+        
         certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
     }
 
     function testEventEmissionOnRevoke() public {
         uint256 certId = certificateNFT.mintCertificate(
-            user,
-            "Alice Dupont",
-            2025001,
-            "Master en Blockchain",
-            unicode"Mention Très Bien",
+            user, 
+            "Alice Dupont", 
+            2025001, 
+            "Master en Blockchain", 
+            unicode"Mention Très Bien", 
             "https://ipfs.io/ipfs/hash_du_certificat"
         );
 
@@ -167,6 +166,5 @@ contract CertificateNFTTest is Test {
         emit CertificateRevoked(certId, block.timestamp, "Erreur administrative");
 
         certificateNFT.revokeCertificate(certId, "Erreur administrative");
->>>>>>> eb608dcc96064e189c47114f9f3d507a147a235b
     }
 }

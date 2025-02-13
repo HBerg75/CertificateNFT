@@ -89,7 +89,7 @@ contract AcademicCertificateNFT is ERC721URIStorage, AccessControl {
             studentFullName: studentFullName,
             studentId: studentId,
             diplomaTitle: diplomaTitle,
-            graduationYear: block.timestamp / 365 days + 1970, // Convertit en année
+            graduationYear: block.timestamp / 365 days + 1970,
             academicGrade: academicGrade,
             isActive: true,
             issuedAt: block.timestamp
