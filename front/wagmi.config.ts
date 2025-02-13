@@ -8,7 +8,8 @@ export default defineConfig({
       project: "../esgichain-nft",
       include: ["AcademicCertificateNFT.json"],
       deployments: {
-        AcademicCertificateNFT: "0xc0121389925343d46124719e8e8f5683f4228fbf",
+        AcademicCertificateNFT: process.env
+          .NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
       },
     }),
     react(),

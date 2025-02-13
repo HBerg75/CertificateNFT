@@ -1,9 +1,9 @@
 import { readContract } from "@wagmi/core";
-import {
-  academicCertificateNftAbi,
-  academicCertificateNftAddress,
-} from "../generated";
+import { academicCertificateNftAbi } from "../generated";
 import { config } from "./wagmi-conf";
+
+const academicCertificateNftAddress = process.env
+  .NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`;
 
 export const getTotalCerts = async () => {
   const result = await readContract(config, {

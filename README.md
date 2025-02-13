@@ -70,11 +70,16 @@ Répondez aux questions interactives :
 - **VM** : `Subnet-EVM`
 - **Validation** : `Proof of Authority`
 - **Contrôleur** : sélectionnez une adresse
+- **Chain ID** : 1234
+- **Token Symbol** : ESGI
 
 Une fois créé, déployez-le sur le réseau local :
 
+prefunding address -> 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 ```bash
-avalanche network deploy ESGIChain --local
+ls ~/.avalanche-cli/subnets/ESGIChain
+avalanche blockchain describe ESGIChain
+avalanche blockchain deploy ESGIChain --local
 ```
 
 Notez l'URL du point de terminaison RPC fourni après le déploiement.
@@ -95,8 +100,8 @@ forge install OpenZeppelin/openzeppelin-contracts
 ### **2️⃣ Compilation et Déploiement du Smart Contract**
 
 ```bash
-forge build
-forge script script/DeployCertificateNFT.s.sol --broadcast --rpc-url http://127.0.0.1:9650 --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --private-key <PRIVATE_KEY>
+source .env
+forge script script/DeployCertificateNFT.s.sol --rpc-url $RPC_URL --sender $PUBLIC_WALLET_ADDRESS --private-key $PRIVATE_KEY -vvvv --broadcast
 ```
 
 ⚠️ **Remarque** : Remplacez `<PRIVATE_KEY>` par votre clé privée.
@@ -143,4 +148,3 @@ Les tests incluent :
 ### **📌 Remarque**
 Si vous avez des questions ou besoin d’aide, référez-vous à la documentation Avalanche :
 🔗 [Avalanche Docs](https://build.avax.network/docs/tooling/create-avalanche-l1)
-

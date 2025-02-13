@@ -96,8 +96,9 @@ forge install OpenZeppelin/openzeppelin-contracts
 ### **2️⃣ Compilation et Déploiement du Smart Contract**
 
 ```bash
+source .env
 forge build
-forge script script/DeployCertificateNFT.s.sol --broadcast --rpc-url http://127.0.0.1:9650 --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --private-key <PRIVATE_KEY>
+forge script script/DeployCertificateNFT.s.sol --rpc-url $RPC_URL -vvvv --broadcast
 ```
 
 ⚠️ **Remarque** : Remplacez `<PRIVATE_KEY>` par votre clé privée.

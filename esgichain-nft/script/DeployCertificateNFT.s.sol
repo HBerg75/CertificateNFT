@@ -18,8 +18,6 @@ contract DeployCertificateNFT is Script {
             // Fuji Testnet
         } else if (chainId == 137) {
             // Polygon mainnet
-        } else {
-            revert("Unsupported network");
         }
     }
 

@@ -548,14 +548,6 @@ export const academicCertificateNftAbi = [
   },
 ] as const
 
-export const academicCertificateNftAddress =
-  '0xC0121389925343D46124719E8e8F5683F4228FBF' as const
-
-export const academicCertificateNftConfig = {
-  address: academicCertificateNftAddress,
-  abi: academicCertificateNftAbi,
-} as const
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -564,10 +556,7 @@ export const academicCertificateNftConfig = {
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link academicCertificateNftAbi}__
  */
 export const useReadAcademicCertificateNft =
-  /*#__PURE__*/ createUseReadContract({
-    abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
-  })
+  /*#__PURE__*/ createUseReadContract({ abi: academicCertificateNftAbi })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link academicCertificateNftAbi}__ and `functionName` set to `"CERTIFICATE_ISSUER"`
@@ -575,7 +564,6 @@ export const useReadAcademicCertificateNft =
 export const useReadAcademicCertificateNftCertificateIssuer =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'CERTIFICATE_ISSUER',
   })
 
@@ -585,7 +573,6 @@ export const useReadAcademicCertificateNftCertificateIssuer =
 export const useReadAcademicCertificateNftDefaultAdminRole =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'DEFAULT_ADMIN_ROLE',
   })
 
@@ -595,7 +582,6 @@ export const useReadAcademicCertificateNftDefaultAdminRole =
 export const useReadAcademicCertificateNftBalanceOf =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'balanceOf',
   })
 
@@ -605,7 +591,6 @@ export const useReadAcademicCertificateNftBalanceOf =
 export const useReadAcademicCertificateNftGetApproved =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'getApproved',
   })
 
@@ -615,7 +600,6 @@ export const useReadAcademicCertificateNftGetApproved =
 export const useReadAcademicCertificateNftGetCertificateDetails =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'getCertificateDetails',
   })
 
@@ -625,7 +609,6 @@ export const useReadAcademicCertificateNftGetCertificateDetails =
 export const useReadAcademicCertificateNftGetCertificatesByStudent =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'getCertificatesByStudent',
   })
 
@@ -635,7 +618,6 @@ export const useReadAcademicCertificateNftGetCertificatesByStudent =
 export const useReadAcademicCertificateNftGetRoleAdmin =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'getRoleAdmin',
   })
 
@@ -645,7 +627,6 @@ export const useReadAcademicCertificateNftGetRoleAdmin =
 export const useReadAcademicCertificateNftGetTotalCertificates =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'getTotalCertificates',
   })
 
@@ -655,7 +636,6 @@ export const useReadAcademicCertificateNftGetTotalCertificates =
 export const useReadAcademicCertificateNftHasRole =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'hasRole',
   })
 
@@ -665,7 +645,6 @@ export const useReadAcademicCertificateNftHasRole =
 export const useReadAcademicCertificateNftIsApprovedForAll =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'isApprovedForAll',
   })
 
@@ -675,7 +654,6 @@ export const useReadAcademicCertificateNftIsApprovedForAll =
 export const useReadAcademicCertificateNftName =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'name',
   })
 
@@ -685,7 +663,6 @@ export const useReadAcademicCertificateNftName =
 export const useReadAcademicCertificateNftOwnerOf =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'ownerOf',
   })
 
@@ -695,7 +672,6 @@ export const useReadAcademicCertificateNftOwnerOf =
 export const useReadAcademicCertificateNftSupportsInterface =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'supportsInterface',
   })
 
@@ -705,7 +681,6 @@ export const useReadAcademicCertificateNftSupportsInterface =
 export const useReadAcademicCertificateNftSymbol =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'symbol',
   })
 
@@ -715,7 +690,6 @@ export const useReadAcademicCertificateNftSymbol =
 export const useReadAcademicCertificateNftTokenUri =
   /*#__PURE__*/ createUseReadContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'tokenURI',
   })
 
@@ -723,10 +697,7 @@ export const useReadAcademicCertificateNftTokenUri =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link academicCertificateNftAbi}__
  */
 export const useWriteAcademicCertificateNft =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
-  })
+  /*#__PURE__*/ createUseWriteContract({ abi: academicCertificateNftAbi })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link academicCertificateNftAbi}__ and `functionName` set to `"approve"`
@@ -734,7 +705,6 @@ export const useWriteAcademicCertificateNft =
 export const useWriteAcademicCertificateNftApprove =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'approve',
   })
 
@@ -744,7 +714,6 @@ export const useWriteAcademicCertificateNftApprove =
 export const useWriteAcademicCertificateNftGrantRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'grantRole',
   })
 
@@ -754,7 +723,6 @@ export const useWriteAcademicCertificateNftGrantRole =
 export const useWriteAcademicCertificateNftMintCertificate =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'mintCertificate',
   })
 
@@ -764,7 +732,6 @@ export const useWriteAcademicCertificateNftMintCertificate =
 export const useWriteAcademicCertificateNftRenounceRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'renounceRole',
   })
 
@@ -774,7 +741,6 @@ export const useWriteAcademicCertificateNftRenounceRole =
 export const useWriteAcademicCertificateNftRevokeCertificate =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'revokeCertificate',
   })
 
@@ -784,7 +750,6 @@ export const useWriteAcademicCertificateNftRevokeCertificate =
 export const useWriteAcademicCertificateNftRevokeRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'revokeRole',
   })
 
@@ -794,7 +759,6 @@ export const useWriteAcademicCertificateNftRevokeRole =
 export const useWriteAcademicCertificateNftSafeTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'safeTransferFrom',
   })
 
@@ -804,7 +768,6 @@ export const useWriteAcademicCertificateNftSafeTransferFrom =
 export const useWriteAcademicCertificateNftSetApprovalForAll =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'setApprovalForAll',
   })
 
@@ -814,7 +777,6 @@ export const useWriteAcademicCertificateNftSetApprovalForAll =
 export const useWriteAcademicCertificateNftTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'transferFrom',
   })
 
@@ -824,7 +786,6 @@ export const useWriteAcademicCertificateNftTransferFrom =
 export const useWriteAcademicCertificateNftUpdateCertificateMetadata =
   /*#__PURE__*/ createUseWriteContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'updateCertificateMetadata',
   })
 
@@ -832,10 +793,7 @@ export const useWriteAcademicCertificateNftUpdateCertificateMetadata =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link academicCertificateNftAbi}__
  */
 export const useSimulateAcademicCertificateNft =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
-  })
+  /*#__PURE__*/ createUseSimulateContract({ abi: academicCertificateNftAbi })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link academicCertificateNftAbi}__ and `functionName` set to `"approve"`
@@ -843,7 +801,6 @@ export const useSimulateAcademicCertificateNft =
 export const useSimulateAcademicCertificateNftApprove =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'approve',
   })
 
@@ -853,7 +810,6 @@ export const useSimulateAcademicCertificateNftApprove =
 export const useSimulateAcademicCertificateNftGrantRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'grantRole',
   })
 
@@ -863,7 +819,6 @@ export const useSimulateAcademicCertificateNftGrantRole =
 export const useSimulateAcademicCertificateNftMintCertificate =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'mintCertificate',
   })
 
@@ -873,7 +828,6 @@ export const useSimulateAcademicCertificateNftMintCertificate =
 export const useSimulateAcademicCertificateNftRenounceRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'renounceRole',
   })
 
@@ -883,7 +837,6 @@ export const useSimulateAcademicCertificateNftRenounceRole =
 export const useSimulateAcademicCertificateNftRevokeCertificate =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'revokeCertificate',
   })
 
@@ -893,7 +846,6 @@ export const useSimulateAcademicCertificateNftRevokeCertificate =
 export const useSimulateAcademicCertificateNftRevokeRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'revokeRole',
   })
 
@@ -903,7 +855,6 @@ export const useSimulateAcademicCertificateNftRevokeRole =
 export const useSimulateAcademicCertificateNftSafeTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'safeTransferFrom',
   })
 
@@ -913,7 +864,6 @@ export const useSimulateAcademicCertificateNftSafeTransferFrom =
 export const useSimulateAcademicCertificateNftSetApprovalForAll =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'setApprovalForAll',
   })
 
@@ -923,7 +873,6 @@ export const useSimulateAcademicCertificateNftSetApprovalForAll =
 export const useSimulateAcademicCertificateNftTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'transferFrom',
   })
 
@@ -933,7 +882,6 @@ export const useSimulateAcademicCertificateNftTransferFrom =
 export const useSimulateAcademicCertificateNftUpdateCertificateMetadata =
   /*#__PURE__*/ createUseSimulateContract({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     functionName: 'updateCertificateMetadata',
   })
 
@@ -941,10 +889,7 @@ export const useSimulateAcademicCertificateNftUpdateCertificateMetadata =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link academicCertificateNftAbi}__
  */
 export const useWatchAcademicCertificateNftEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
-    abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
-  })
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: academicCertificateNftAbi })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link academicCertificateNftAbi}__ and `eventName` set to `"Approval"`
@@ -952,7 +897,6 @@ export const useWatchAcademicCertificateNftEvent =
 export const useWatchAcademicCertificateNftApprovalEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'Approval',
   })
 
@@ -962,7 +906,6 @@ export const useWatchAcademicCertificateNftApprovalEvent =
 export const useWatchAcademicCertificateNftApprovalForAllEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'ApprovalForAll',
   })
 
@@ -972,7 +915,6 @@ export const useWatchAcademicCertificateNftApprovalForAllEvent =
 export const useWatchAcademicCertificateNftBatchMetadataUpdateEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'BatchMetadataUpdate',
   })
 
@@ -982,7 +924,6 @@ export const useWatchAcademicCertificateNftBatchMetadataUpdateEvent =
 export const useWatchAcademicCertificateNftCertificateMetadataUpdatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'CertificateMetadataUpdated',
   })
 
@@ -992,7 +933,6 @@ export const useWatchAcademicCertificateNftCertificateMetadataUpdatedEvent =
 export const useWatchAcademicCertificateNftCertificateMintedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'CertificateMinted',
   })
 
@@ -1002,7 +942,6 @@ export const useWatchAcademicCertificateNftCertificateMintedEvent =
 export const useWatchAcademicCertificateNftCertificateRevokedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'CertificateRevoked',
   })
 
@@ -1012,7 +951,6 @@ export const useWatchAcademicCertificateNftCertificateRevokedEvent =
 export const useWatchAcademicCertificateNftMetadataUpdateEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'MetadataUpdate',
   })
 
@@ -1022,7 +960,6 @@ export const useWatchAcademicCertificateNftMetadataUpdateEvent =
 export const useWatchAcademicCertificateNftRoleAdminChangedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'RoleAdminChanged',
   })
 
@@ -1032,7 +969,6 @@ export const useWatchAcademicCertificateNftRoleAdminChangedEvent =
 export const useWatchAcademicCertificateNftRoleGrantedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'RoleGranted',
   })
 
@@ -1042,7 +978,6 @@ export const useWatchAcademicCertificateNftRoleGrantedEvent =
 export const useWatchAcademicCertificateNftRoleRevokedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'RoleRevoked',
   })
 
@@ -1052,6 +987,5 @@ export const useWatchAcademicCertificateNftRoleRevokedEvent =
 export const useWatchAcademicCertificateNftTransferEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: academicCertificateNftAbi,
-    address: academicCertificateNftAddress,
     eventName: 'Transfer',
   })
