@@ -3,12 +3,12 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,7 +17,8 @@ import { useWriteAcademicCertificateNftMintCertificate } from "@/generated";
 import { useHasRoleCertIssuer } from "@/lib/hook";
 import { isValidAddress } from "@/lib/utils";
 import { AlertCircle } from "lucide-react";
-import { useState } from "react";
+import { revalidatePath } from "next/cache";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { BaseError, useWaitForTransactionReceipt } from "wagmi";
 import { z } from "zod";
@@ -74,6 +75,7 @@ export default function AddCert() {
     }
 
     writeContract({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
       args: [
         formData.recipient,
         formData.studentFullName,
@@ -84,6 +86,12 @@ export default function AddCert() {
       ],
     });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      revalidatePath("/");
+    }
+  }, [isSuccess]);
 
   const isCertIssuer = useHasRoleCertIssuer();
   if (!isCertIssuer) return;

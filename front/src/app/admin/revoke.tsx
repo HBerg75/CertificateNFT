@@ -3,19 +3,20 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AlertCircle } from "lucide-react";
 
 import { useWriteAcademicCertificateNftRevokeCertificate } from "@/generated";
-import { useState } from "react";
+import { revalidatePath } from "next/cache";
+import { useEffect, useState } from "react";
 import { type BaseError, useWaitForTransactionReceipt } from "wagmi";
 
 export default function Revoke() {
@@ -39,9 +40,16 @@ export default function Revoke() {
     e.preventDefault();
 
     writeContract({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
       args: [BigInt(certIdToRevoke), reason],
     });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      revalidatePath("/");
+    }
+  }, [isSuccess]);
 
   return (
     <Card>

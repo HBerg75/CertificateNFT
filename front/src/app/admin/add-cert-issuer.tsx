@@ -46,6 +46,7 @@ export default function AddCertIssuer() {
     }
 
     writeContract({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
       args: [await getCertificateIssuerRole(), newIssuerAddress],
     });
   };
